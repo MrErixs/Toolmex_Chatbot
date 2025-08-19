@@ -25,3 +25,5 @@ const prefixArray = Array.from(prefixes);
 
 // Guardar como JSON
 fs.writeFileSync('./prefixes.json', JSON.stringify(prefixArray, null, 2), 'utf8');
+
+console.log("Se actualizaron los prefijos de las IDs del cátalogo de Toolmex.");

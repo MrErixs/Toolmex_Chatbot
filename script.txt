@@ -1,3 +1,4 @@
 // Corre el siguiente comando
 npm install
-npm run find
+node filterIds.js
+node scraper.js
