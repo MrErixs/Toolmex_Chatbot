@@ -47,8 +47,6 @@ def procesar_producto(row, max_retries=3):
         try:
             driver.get(url)
             wait = WebDriverWait(driver, 10)
-
-            nombre = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1"))).text
             prod_id = url.split("itemid=")[-1]
 
             try:
@@ -66,7 +64,6 @@ def procesar_producto(row, max_retries=3):
             texto = caracteristicas.replace("\n", ", ").replace("\r", "")
             producto_pgvector = {
                 "id": prod_id,
-                "nombre": nombre,
                 "tech_details": texto,
                 "image": image
             }
@@ -89,7 +86,7 @@ def procesar_producto(row, max_retries=3):
 
 # Ejecutar en paralelo
 productos_pgvector = []
-max_workers = 6  # Número de navegadores simultáneos #24-CRASHEA #12-Lightcrash #6-Errorless=30minutes
+max_workers = 5  # Número de navegadores simultáneos #24-CRASHEA #12-Lightcrash #6-Errorless=30minutes
 i = 0
 with ThreadPoolExecutor(max_workers=max_workers) as executor:
     futures = [executor.submit(procesar_producto, row) for idx, row in df.iterrows()]
